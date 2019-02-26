@@ -1,0 +1,82 @@
+#include<queue>
+#include<set>
+#include<cstdio>
+#include <iostream>
+#include<algorithm>
+#include<cstring>
+#include<cmath>
+using namespace std;
+/*
+    trie字典树
+*/
+struct tnode{
+    int sum;//用来判断是否是终点的
+    tnode* next[26];
+    tnode(){
+        for(int i =0;i<26;i++)
+            next[i]=NULL;
+        sum=0;
+    }
+};
+tnode *root;
+
+//插入函数
+void Insert(char *s) {
+    tnode *p = root;
+    for(int i = 0 ; s[i] ; i++) {
+        int x = s[i] - 'a';
+        if(p->next[x]==NULL) {
+            tnode *nn = new tnode();
+            p->next[x]=nn;
+        }
+        p = p->next[x];
+    }
+    p->sum++;//这个单词终止啦
+}
+
+//匹配函数
+bool Compare(char *ch) {
+    tnode *p = root;
+    int len = strlen(ch);
+    for(int i = 0; i < len; i++) {
+        int x = ch[i] - 'a';
+        p = p->next[x];
+        if(p==NULL) {
+            return false;
+        }
+    }
+    if(p->sum>0 ){
+        return true;
+    }
+    return false;
+}
+
+void DELETE(tnode * &top){
+    if(top==NULL)
+    return;
+    for(int i =0;i<26;i++)
+        DELETE(top->next[i]);
+    delete top;
+}
+
+int main()
+{
+    int n,m;
+    cin>>n;
+    char s[20];
+    root = new tnode();
+    for(int i =0;i<n;i++){
+        scanf("%s",s);
+        Insert(s);
+    }
+    cin>>m;
+    for(int i =0;i<m;i++){
+        scanf("%s",s);
+        if(Compare(s))
+            cout<<"YES"<<endl;
+        else
+            cout<<"NO"<<endl;
+    }
+    DELETE(root);//看见指针就要想到释放,然而这东西会花时间，所以网上很多人写ACM题就不delete了，我很看不惯这一点。
+    return 0;
+}

@@ -1,0 +1,48 @@
+#include<iostream>
+#include<cstdlib>
+#include<cstdio>
+#include<string>
+#include<vector>
+#include<map>
+#include<set>
+#include<queue>
+#include<stack>
+
+#define ll long long
+#define myfor(a,b,c) for(int i=a;a<=b?i<=b:i>=b;a<=b?++i:--i)
+
+using namespace std;
+
+const int number=3;
+
+int main()
+{
+    int sum;//sum是指数
+    int c1[33005], c2[33005];
+    while(scanf("%d", &sum), sum)
+    {
+        for(int i = 0; i <= sum; ++i)
+        {
+            c1[i] = 1;//初始化为第一个括号各项的系数，之后再依次与后边的合并更新
+            c2[i] = 0;
+        }
+        //复杂度O(number*sum*sum),也可通过打表后O(1)访问
+        for(int i = 2; i <= number; ++i)// 共有number个大括号相乘 ，直接从第二个括号开始合并，并且第i个括号内是以x^i为公比的等比数列，若无此数列则删除此i即可
+        {
+            for(int j = 0; j <= sum; ++j)// 每次都合并到第一个括号中，这里 j 代表第一个括号中的各项系数
+            {
+                for(int k = 0; k+j <= sum; k += i) //虽然括号之间是相乘关系，但是指数之间是相加关系
+                {
+                    c2[k+j] += c1[j]; // c2 数组可以理解为每次存放的中间结果,因为每次都是后边的括号与第一个括号可并，而后边的括号系数都为一，所以只有第一个括号中的系数对合并后相应的系数有贡献
+                }
+            }
+            for(int j = 0; j <= sum; ++j)
+            {
+                c1[j] = c2[j];
+                c2[j] = 0;       // 记得每次合并一个括号后要把   c2 清零
+            }
+        }
+        printf("%d\n", c1[sum]);
+    }
+    return 0;
+}
