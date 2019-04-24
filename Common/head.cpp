@@ -1,6 +1,24 @@
 //head.cpp
+//  c
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <ctime>
+// C++
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <map>
+#include <memory>
+#include <queue>
+#include <set>
+#include <stack>
+#include <string>
+#include <vector>
 
-#include <bits/stdc++.h>
+#define myfor(i,a,b) for(int i=a;a<b?i<b:i>0;a<b?++i:--i)
 #define per(i,a,n) for (int i=a;i<n;i++)
 #define rep(i,a,n) for (int i=n-1;i>=a;i--)
 #define pb push_back
