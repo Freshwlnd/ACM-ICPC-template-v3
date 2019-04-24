@@ -16,9 +16,9 @@ void getnext()//获取next数组
 	while(i<n) {
 		if(k==-1 || ptr[k]==ptr[i]) {
 			i++;k++;
-			next[i] = k;
+			nextt[i] = k;
 		} else {
-			k = next[k];
+			k = nextt[k];
 		}
 		//next表示的是“0～i-1”中，“最长前后缀”长度
 	}
