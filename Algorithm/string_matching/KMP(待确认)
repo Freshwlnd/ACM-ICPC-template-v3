@@ -10,7 +10,7 @@ const int N = 100005;
 char str[maxlen],ptr[maxlen];//父串str和子串ptr
 int nextt[maxlen];
 
-void getnext()//获取next数组
+void getnext()//获取nextt数组
 {
 	int i,n,k;
 	n=strlen(ptr);
