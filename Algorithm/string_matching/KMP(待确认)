@@ -1,9 +1,12 @@
-#include <iostream>
-#include <cstring>
-#include <cstdio>
+#include<bits/stdc++.h>
+
+#define INF 0x3fffffff
+#define ll long long
+#define per(i,a,b) for(int i=a;a<b?i<b:i>0;a<b?++i:--i)
+
 using namespace std;
 
-const int maxlen=100;
+const int N = 100005;
 char str[maxlen],ptr[maxlen];//父串str和子串ptr
 int nextt[maxlen];
 
@@ -20,7 +23,7 @@ void getnext()//获取next数组
 		} else {
 			k = nextt[k];
 		}
-		//next表示的是“0～i-1”中，“最长前后缀”长度
+		//nextt[i]表示的是“0～i-1”中，“最长前后缀”长度
 	}
 }
 
