@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+const int mod=1e9+7;
+#define ll long long
+#define maxn 15
+using namespace std;
+int T[maxn], n, a[maxn], b[maxn], length, num[maxn],f[maxn],ff[maxn];
+int lowbit(int x){
+    return x&(-x);
+}
+int query(int x){
+    int ans=0;
+    while(x){
+        if(ans<T[x])
+            ans=T[x];
+        x-=lowbit(x);
+    }
+    return ans;
+}
+void update(int x,int len,int number){
+    while(x<=length){
+        if(T[x]<len)
+            T[x]=len,num[x]=number;
+        else if(T[x]==len)
+            num[x]+=number;
+        num[x]%=mod;
+        x+=lowbit(x);
+    }
+}
+int query_number(int x,int length){
+    int ans=0;
+    while(x){
+        if(T[x]==length)
+            ans+=num[x];
+        num[x]%=mod;
+        x-=lowbit(x);
+    }
+    return ans;
+}
+int main(){
+    cin>>n;
+    for(int i=1;i<=n;++i){
+        T[i]=0;
+        cin>>a[i];
+        b[i]=a[i];
+    }
+    T[n+1]=0;
+    sort(b+1,b+1+n);
+    length=unique(b+1,b+1+n)-b-1;
+    int ans=0;
+    for(int i=1;i<=n;++i){
+        a[i]=lower_bound(b+1,b+1+length,a[i])-b-1;//有多少个小于a[i]的元素
+        int q = query(a[i])+1;
+        int nu=query_number(a[i], q - 1);
+        nu=max(nu,1);
+        ans=max(ans, q);
+        update(a[i]+1, q, nu);
+        //cout<<q<<' '<<nu<<endl;
+    }
+    //cout<<query_number(length,ans)<<endl;
+    cout<<ans<<endl;
+
+}
+
