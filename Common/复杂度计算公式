@@ -1,0 +1,3 @@
+T(n)=b*T(n/a)+O(x)//T为操作次数，O为复杂度
+
+n*loga(b) == x ? xlogn:max(n*loga(b),x)//
