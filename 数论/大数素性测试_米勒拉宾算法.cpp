@@ -1,5 +1,7 @@
 //米勒拉宾算法
 //大数素性测试
+//原文：https://blog.csdn.net/qq_37957829/article/details/77335072 
+
 //引言
 //小费马定理为：若有素数p，则对任意的数a (a为正整数，且a<p)，a^( p-1 ) ≡ 1( mod p )
 //但部分合数也满足 a^( p-1 ) ≡ 1( mod p )，被称为Carmichael数
