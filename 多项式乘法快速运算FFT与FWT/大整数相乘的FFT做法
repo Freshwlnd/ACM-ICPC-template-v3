@@ -1,4 +1,4 @@
-大整数相乘的FFT做法
+//大整数相乘的FFT做法
 #include<cstdio>
 #include<algorithm>
 #include<cstring>
