@@ -1,12 +1,17 @@
-const int MAXN(1e4+7);
+#define per(i, a, b) for(int i=a; i<b; i++)
+#define rep(i, a, b) for(int i=b-1; i>=a; i--)
+#define mem(a, b) memset(a, b, sizeof(b))
+
+const int MAXN(1e2+7);
+const int MAXM(1e5+7);
 const int INF(0x3f3f3f3f);
 int n;
 
 int mapp[MAXN][MAXN];
-int len[MAXN];    //Dijkstra & SPFA
+int len[MAXN];    //Dijkstra & SPFA & Bellman_Ford
+int vis[MAXN];    //Dijkstra & SPFA
 
 //Dijkstra
-bool vis[MAXN];
 void Dijkstra(int u) {
     mem(vis, 0);
     mem(len, 0x3f);
@@ -14,16 +19,14 @@ void Dijkstra(int u) {
     len[u] = 0;
 
     per(i, 1, n) {
-        per(j, 1, n + 1) {
-            if (len[j] > mapp[u][j] + len[u]) {
-                len[j] = mapp[u][j] + len[u];
-            }
-        }
         int mp = u, mm = INF;
         per(j, 1, n + 1) {
-            if (!vis[j] && len[j] < mm) {
-                mm = len[j];
-                mp = j;
+            if (!vis[j]) {
+                len[j] = min(len[j], mapp[u][j] + len[u]);
+                if (len[j] < mm) {
+                    mm = len[j];
+                    mp = j;
+                }
             }
         }
         u = mp;
@@ -39,11 +42,15 @@ void Floyd() {
 }
 
 //SPFA
+//跑得快
+//能计算负权图
+//可以判断负环
 queue<int> Q;
-
 void SPFA(int pos) {
     //初始化
     mem(len, 0x3f);
+    mem(vis, 0);
+    vis[pos] = 1;
     len[pos] = 0;
     Q.push(pos);
     //队列操作
@@ -51,11 +58,48 @@ void SPFA(int pos) {
     while (!Q.empty()) {
         v = Q.front();
         Q.pop();
+        vis[pos] = 0;
         per (i, 1, n + 1) {
             if (len[i] > mapp[v][i] + len[v]) {
                 len[i] = mapp[v][i] + len[v];
-                Q.push(i);
+                if(!vis[pos]) {
+                    Q.push(i);
+                    vis[pos] = 1;
+                }
             }
         }
+    }
+}
+
+
+//Bellman_Ford
+//可以判断负环
+int m;
+int u[MAXM], v[MAXM], w[MAXM];
+void Bellman_Ford(int s) {
+    mem(len, 0x3f);
+    len[s] = 0;
+
+    per(i,1,n) {            //一条最短路最多经过n-1条边
+        int cg=1;           //标记本轮是否有修改，无修改则说明达到最终状态(优化)
+        per(j,0,m) {
+            if (len[v[j]] > len[u[j]] + w[j]) {
+                len[v[j]] = len[u[j]] + w[j];
+                cg = 0;
+            }
+        }
+        if(cg) break;
+    }
+
+    //判断是否存在负环
+    int cg = 0;
+    per(i,0,m) {
+        if(len[v[i]]>len[u[i]]+w[i]) {
+            cg = 1;
+            break;
+        }
+    }
+    if(cg) {
+        //存在负环
     }
 }
