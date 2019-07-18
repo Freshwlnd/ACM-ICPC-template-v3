@@ -37,38 +37,7 @@ void Dijkstra(int u) {
 //Floyd
 void Floyd() {
     per(k, 1, n+1) per(i, 1, n+1) per(j, 1, n+1)
-    if (mapp[i][j] > mapp[i][k] + mapp[k][j])
-        mapp[i][j] = mapp[i][k] + mapp[k][j];
-}
-
-//SPFA
-//跑得快
-//能计算负权图
-//可以判断负环
-queue<int> Q;
-void SPFA(int pos) {
-    //初始化
-    mem(len, 0x3f);
-    mem(vis, 0);
-    vis[pos] = 1;
-    len[pos] = 0;
-    Q.push(pos);
-    //队列操作
-    int v;
-    while (!Q.empty()) {
-        v = Q.front();
-        Q.pop();
-        vis[pos] = 0;
-        per (i, 1, n + 1) {
-            if (len[i] > mapp[v][i] + len[v]) {
-                len[i] = mapp[v][i] + len[v];
-                if(!vis[pos]) {
-                    Q.push(i);
-                    vis[pos] = 1;
-                }
-            }
-        }
-    }
+    mapp[i][j] = min(mapp[i][j], mapp[i][k] + mapp[k][j]);
 }
 
 
@@ -101,5 +70,35 @@ void Bellman_Ford(int s) {
     }
     if(cg) {
         //存在负环
+    }
+}
+
+//SPFA
+//跑得快(是Bellman-Ford的优化版本)
+//会被恶意数据卡掉，若无负权边，优先用Dijkstra
+//能计算负权图
+//可以判断负环
+queue<int> Q;
+void SPFA(int s) {
+    //初始化
+    mem(len, 0x3f);
+    mem(vis, 0);
+    vis[s] = 1;
+    len[s] = 0;
+    Q.push(s);
+    //队列操作
+    while (!Q.empty()) {
+        s = Q.front();
+        Q.pop();
+        vis[s] = 0;
+        per (i, 1, n + 1) {
+            if (len[i] > len[s] + mapp[s][i]) {
+                len[i] = len[s] + mapp[s][i];
+                if(!vis[i]) {
+                    Q.push(i);
+                    vis[i] = 1;
+                }
+            }
+        }
     }
 }
