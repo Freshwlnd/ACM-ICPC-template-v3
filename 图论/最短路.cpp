@@ -79,13 +79,21 @@ void Bellman_Ford(int s) {
 //能计算负权图
 //可以判断负环
 queue<int> Q;
-void SPFA(int s) {
+int SPFA(int s) {
     //初始化
     mem(len, 0x3f);
     mem(vis, 0);
     vis[s] = 1;
     len[s] = 0;
     Q.push(s);
+
+#ifdef 判负环
+    //记录更新次数
+    int cntn[MAXN];
+    mem(cntn, 0);
+    cntn[s] = 1;
+#endif
+
     //队列操作
     while (!Q.empty()) {
         s = Q.front();
@@ -95,10 +103,16 @@ void SPFA(int s) {
             if (len[i] > len[s] + mapp[s][i]) {
                 len[i] = len[s] + mapp[s][i];
                 if(!vis[i]) {
+
+#ifdef 判负环
+                    if(++cntn[s]>n) { return 1; }   //存在负环
+#endif
+
                     Q.push(i);
                     vis[i] = 1;
                 }
             }
         }
     }
+    return 0;
 }
