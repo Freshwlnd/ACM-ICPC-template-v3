@@ -11,6 +11,7 @@ inline double LCP(int a1, int a2, int b1, int b2) {
     return (x[a2]-x[a1])*(y[b2]-y[b1])-(x[b2]-x[b1])*(y[a2]-y[a1]);
 }
 
+//Line Intersect 线段相交：true相交/false不相交
 inline int LI(int line1, int line2) {
     int a1 = line1*2, a2 = a1+1;    //起点-终点
     int b1 = line2*2, b2 = b1+1;    //起点-终点
