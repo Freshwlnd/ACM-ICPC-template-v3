@@ -1,0 +1,25 @@
+int exgcd(int a,int b,int &x,int &y){//扩展欧几里得
+    if(!b){x=1,y=0;return a;}//b为0则最大公约数为a，gcd(a,b)=a*1+b*0;
+    int re=exgcd(b,a%b,x,y),tmp=x;//re即最大公约数，x，y是两个整数使得gcd(a,b)=a*x+b*y;
+    x=y,y=tmp-(a/b)*y;//拓展欧几里得公式
+    return re;
+}
+
+LL a[11],b[11],n,m;//b是余数。X%a=b;
+
+LL work(){
+    LL M=a[1],A=b[1],t,d,x,y;
+    int i;
+    for(i=2;i<=m;i++){
+        d=exgcd(M,a[i],x,y);//解方程，gcd（M，a[i]）=M*x+a[i]*y;
+        if((b[i]-A)%d)return -1;//无解
+        x*=(b[i]-A)/d;
+        t=a[i]/d;
+        x=(x%t+t)%t;//求x
+        A=M*x+A;//M是前i-1项的最小公倍数，A是最终答案。
+        M=M/d*a[i];
+        A%=M;//日常模一模，防止爆
+    }
+    A=(A%M+M)%M;
+    return A;
+}

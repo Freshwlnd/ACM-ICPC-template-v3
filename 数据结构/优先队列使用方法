@@ -1,0 +1,37 @@
+//下面两种优先队列的定义是等价的
+priority_queue<int> q;
+priority_queue<int,vector<int>,less<int> >;//后面有一个空格
+
+1.此处指的基本数据类型就是 int 型，double 型，char 型等可以直接使用的数据类型，优先队列对他们的优先级设置一般是数字大的优先级高，
+因此队首元素就是优先队列内元素最大的那个（如果是 char 型，则是字典序最大的）。
+
+2.其中第二个参数( vector )，是来承载底层数据结构堆的容器，第三个参数( less )，则是一个比较类，less 表示数字大的优先级高，
+而 greater 表示数字小的优先级高。即priority_queue<int, vector<int>, greater<int> >
+
+
+------------------------------------------------分割线--------------------------------------------------------------------------
+对于结构体，优先级设置分两种方法
+1.重载运算符'<'
+struct student{
+    int grade;
+    string name;
+
+    //重载运算符，grade 值高的优先级大
+    friend operator < (student s1,student s2){
+        return s1.grade < s2.grade;
+    }
+};
+priority_queue<student> q;
+
+2.把重载函数写在结构体外
+struct fruit{
+    string name;
+    int price;
+};
+struct cmp{     
+    // "<" 表示 price 大的优先级高
+    bool operator() (fruit f1,fruit f2){
+        return f1.price < f2.price;
+    }
+};
+priority_queue<fruit, vector<fruit>, cmp> q;
