@@ -10,7 +10,7 @@ struct trnd{
 int cntt;
 inline void insrt(int rt, const string& str) {
     int f;
-    per(i, 0, LEN) {
+    per(i, 0, str.length()) {
         f = str[i]-'a';
         if(!Trie[rt].son[f]) {
             Trie[rt].son[f] = cntt;
