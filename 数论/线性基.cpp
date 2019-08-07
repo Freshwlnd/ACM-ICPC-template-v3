@@ -53,6 +53,16 @@ struct Linear_Basis{
             }
         return val>0;
     }
+    //可生成0就返回true
+    bool check(long long val) {
+        for (int i = 32; i >= 0; i--)
+            if (val & (1LL << i)) {
+                if (!d[i])
+                    return false;
+                val ^= d[i];
+            }
+        return true;
+    }
     //计算线性基向量空间内最大值
     long long query_max()
     {
