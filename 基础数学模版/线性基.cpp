@@ -109,6 +109,6 @@ Linear_Basis merge(const Linear_Basis &n1,const Linear_Basis &n2)
     Linear_Basis ret=n1;
     for (int i=60;i>=0;i--)
         if (n2.d[i])
-            ret.insert(n1.d[i]);
+            ret.insert(n2.d[i]);
     return ret;
 }
