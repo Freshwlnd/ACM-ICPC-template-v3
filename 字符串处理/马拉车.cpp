@@ -1,6 +1,10 @@
 string str;
 int outt;
 
+//若要判断[l,r]是否为回文串 (1<=l,r<=str.length())
+//令len=r-l+1
+//if(numm[(l*2+r*2)/2]>=len) 为回文串
+//简化为  numm[l+r]>=len
 int numm[2*MAXN];   //记录各点为中心回文串半径(开区间)
 void manacher() {   //计算回文串个数（包括长度为1串）
     string pptr;
