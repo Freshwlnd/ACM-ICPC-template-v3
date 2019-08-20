@@ -32,7 +32,6 @@ const double sfive(sqrt(5));
 using namespace std;
 ll powmod(ll a, ll b) { ll res = 1; a %= mod; assert(b >= 0); for (; b; b >>= 1) { if (b & 1)res = res * a % mod; a = a * a % mod; }return res; }
 ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
-inline ll S(ll x) { return x * x; }
 int T;
 int n, m, a[maxn], unit, pre[maxn], l, r;
 ll trueans[maxn], ans;

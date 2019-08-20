@@ -9,7 +9,7 @@
 
 //NTT解决的是多项式乘法带模数的情况，可以说有些受模数的限制，数也比较大，
 //但是因为没有复数部分，所以它比较方便
-
+#define LL long long
 const int mod(998244353);
 ll powmod(ll a, ll b) { ll res = 1; a %= mod; assert(b >= 0); for (; b; b >>= 1) { if (b & 1)res = res * a%mod; a = a * a%mod; }return res; }
 
@@ -21,6 +21,7 @@ inline int D(int x) {
 }
 
 inline void NTT(int a[],int n,int op) {
+    //类似于fft的二进制下标反转
     for(int i=1,j=n>>1;i<n-1;++i) {
         if(i<j)
             swap(a[i],a[j]);
@@ -52,6 +53,7 @@ inline void NTT(int a[],int n,int op) {
 
 inline vector<int> Conv(vector<int> const &A,vector<int> const &B,int N) {
     static int a[MAXN],b[MAXN];
+    //返回刚好比x大的2^i的值
     auto Make2=[](int x)->int {
         return 1<<((32-__builtin_clz(x))+((x&(-x))!=x));
     };
@@ -71,7 +73,6 @@ inline vector<int> Conv(vector<int> const &A,vector<int> const &B,int N) {
 }
 
 int main() {
-
     //初始化两个矩阵
     vector<int> a(n);
     for(int i=0;i<n;++i) cin>>a[i];
@@ -79,6 +80,5 @@ int main() {
     for(int i=0;i<n;++i) cin>>h[i];
     //做卷积
     a=Conv(h,a,n);
-
     return 0;
 }
