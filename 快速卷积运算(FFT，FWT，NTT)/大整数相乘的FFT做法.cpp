@@ -37,7 +37,7 @@ void fft(cd *a,int n,int dft)
 			}
 		}
 	}
-	if(dft==-1) for(int i=0;i<n;i++) a[i]/=n;//如果需要取模则需求n的逆元
+	if(dft==-1) for(int i=0;i<n;i++) a[i]/=n;
 }
 int output[maxl];
 int main()
