@@ -22,9 +22,9 @@ int main()
             }
         }
         //寻找每一次选择的每个花费的最大价值。
-        for(int j=1;j<=n;++j){
-            for(int i=1;i<=m;++i){
-                a[j][i]=max(a[j][i],a[j][i-1]);
+        for(int i=1;i<=n;++i){
+            for(int j=1;j<=m;++j){
+                a[i][j]=max(a[i][j],a[i][j-1]);
             }
         }
         //第n次选择的最优解已经在上面循环中求出

@@ -1,3 +1,4 @@
+//blog：https://www.cnblogs.com/love-yh/p/7072161.html
 string Manacher(string s)
 {
 	/*改造字符串*/
