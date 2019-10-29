@@ -43,8 +43,8 @@ int main() {
     per(i, 1, len) extand(s[i]-'a');
     //计算每个长度的子串出现最多的次数
     topsort();  //拓扑排序
-    per(i,1,cnt+1) ans[mx[i]] = max(ans[mx[i]],R[i]);
-    rep(i,1,len-1) ans[i] = max(ans[i],ans[i+1]);
-    per(i,1,len) printf("%lld\n",ans[i]);
+    per(i, 1, cnt+1) ans[mx[i]] = max(ans[mx[i]],R[i]);
+    rep(i, 1, len-1) ans[i] = max(ans[i],ans[i+1]);
+    per(i, 1, len) cout << ans[i] << endl;
     return 0;
 }
