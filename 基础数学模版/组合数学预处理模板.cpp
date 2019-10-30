@@ -2,7 +2,7 @@ const int maxn = 1e5 + 5;
 ll powmod(ll a, ll b) { ll res = 1; a %= mod; assert(b >= 0); for (; b; b >>= 1) { if (b & 1)res = res * a % mod; a = a * a % mod; }return res; }
 ll fac[maxn];
 ll invfac[maxn];
-//预处理阶乘和阶乘的逆元
+//棰勫鐞嗛樁涔樺拰闃朵箻鐨勯�嗗厓
 void init()
 {
     fac[0] = 1;

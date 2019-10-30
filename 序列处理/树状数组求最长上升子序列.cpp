@@ -1,4 +1,4 @@
-int T[maxn], n, a[maxn], b[maxn], k[maxn], length, num[maxn], f[maxn], t;
+ï»¿int T[maxn], n, a[maxn], b[maxn], k[maxn], length, num[maxn], f[maxn], t;
 int lowbit(int x) {
     return x & (-x);
 }
@@ -29,10 +29,10 @@ void acm() {
         sort(b + 1, b + 1 + n);
         length = unique(b + 1, b + 1 + n) - b - 1;
         int ans = 0;
-        //Çó´Ó1¿ªÊ¼µ½a[i]-1µÄ×î³¤ÉÏÉı×ÓĞòÁĞ³¤¶ÈºÍÊıÁ¿
+        //æ±‚ä»1å¼€å§‹åˆ°a[i]-1çš„æœ€é•¿ä¸Šå‡å­åºåˆ—é•¿åº¦å’Œæ•°é‡
         for (int i = 1; i <= n; ++i) {
-            a[i] = lower_bound(b + 1, b + 1 + length, a[i]) - b - 1;//ÓĞ¶àÉÙ¸öĞ¡ÓÚa[i]µÄÔªËØ
-            //a[i] = length-a[i]-1;//É¾È¥¡®//¡¯±ä³É´Óa[i]+1¿ªÊ¼µ½½áÎ²µÄ×î³¤ÉÏÉı×ÓĞòÁĞ
+            a[i] = lower_bound(b + 1, b + 1 + length, a[i]) - b - 1;//æœ‰å¤šå°‘ä¸ªå°äºa[i]çš„å…ƒç´ 
+            //a[i] = length-a[i]-1;//åˆ å»â€˜//â€™å˜æˆä»a[i]+1å¼€å§‹åˆ°ç»“å°¾çš„æœ€é•¿ä¸Šå‡å­åºåˆ—
             f[i] = query(a[i]) + 1;
             ans = max(ans, f[i]);
             update(a[i] + 1, f[i]);//cout<<f[i]<<endl;

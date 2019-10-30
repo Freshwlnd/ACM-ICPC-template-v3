@@ -1,5 +1,5 @@
 #pragma warning(disable:4996)
-//ÌâÃæ²Î¼ûhttps://ac.nowcoder.com/acm/problem/14532
+//é¢˜é¢å‚è§https://ac.nowcoder.com/acm/problem/14532
 #include<bits/stdc++.h>
 #define upf(a,b,c) for(ll a=b;a<=c;++a)
 #define drf(a,b,c) for(ll a=b;a>=c;--a)
@@ -27,12 +27,12 @@ ll powmod(ll a, ll b) {
 }
 void qpow(ll m) {
     while (m) {
-        if (m & 1) {//ÀàËÆ¿ìËÙÃİ£¬µ±m&1==1Ê±ĞèÒª½«Õâ²¿·ÖA¼Óµ½BÉÏ¶ø
+        if (m & 1) {//ç±»ä¼¼å¿«é€Ÿå¹‚ï¼Œå½“m&1==1æ—¶éœ€è¦å°†è¿™éƒ¨åˆ†AåŠ åˆ°Bä¸Šè€Œ
             mem(C, 0);
-            upf(i, 0, n - 1)upf(j, 0, n - 1)C[i] = (C[i] + A[(j - i + n) % n] * B[j]) % mod;//´Ë´¦ÊÇ°ÑA¼Óµ½BÉÏµÄ¹ı³Ì
+            upf(i, 0, n - 1)upf(j, 0, n - 1)C[i] = (C[i] + A[(j - i + n) % n] * B[j]) % mod;//æ­¤å¤„æ˜¯æŠŠAåŠ åˆ°Bä¸Šçš„è¿‡ç¨‹
             upf(i, 0, n - 1) B[i] = C[i];
         }
-        //½«A'±¶Ôö'
+        //å°†A'å€å¢'
         mem(C, 0);
         upf(i, 0, n - 1)upf(j, 0, n - 1)C[i] = (C[i] + A[(j - i + n) % n] * A[j]) % mod;
         upf(i, 0, n - 1)A[i] = C[i];
@@ -59,12 +59,12 @@ int main()
         cin >> n >> m >> k;
         upf(i, 0, n - 1) {
             cin >> a[i];
-            A[i] = dis(i, 0) >= k ? 0 : k - dis(i, 0);//¼ÇÂ¼Ã¿¸öµãµ½0µãµÄ¾àÀë
-            B[i] = a[i];//³õÊ¼BÊı×é±£´æÁË³õÊ¼µÄÊı¾İ
+            A[i] = dis(i, 0) >= k ? 0 : k - dis(i, 0);//è®°å½•æ¯ä¸ªç‚¹åˆ°0ç‚¹çš„è·ç¦»
+            B[i] = a[i];//åˆå§‹Bæ•°ç»„ä¿å­˜äº†åˆå§‹çš„æ•°æ®
         }
-        A[0] = 0;//×Ô¼º²»ÄÜ´«²¥×Ô¼º
+        A[0] = 0;//è‡ªå·±ä¸èƒ½ä¼ æ’­è‡ªå·±
         qpow(m);
-        upf(i, 0, n - 1)cout << B[i] << " \n"[i == n - 1];//BÊı×é±£´æÁËm´ÎÑ­»·ºóµÄ½á¹û
+        upf(i, 0, n - 1)cout << B[i] << " \n"[i == n - 1];//Bæ•°ç»„ä¿å­˜äº†mæ¬¡å¾ªç¯åçš„ç»“æœ
     }
     return 0;
 }

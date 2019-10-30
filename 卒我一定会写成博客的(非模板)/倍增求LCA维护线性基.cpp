@@ -1,23 +1,23 @@
 #pragma warning(disable:4996)
-//~ÌâÃæ~
-//A ¹ú¹²ÓÐ n ×ù³ÇÊÐ£¬ÕâÐ©³ÇÊÐÓÉ n-1 ÌõµÀÂ·ÏàÁ¬£¬Ê¹µÃÈÎÒâÁ½×ù³ÇÊÐ¿ÉÒÔ»¥´ï£¬ÇÒÂ·¾¶Î¨Ò»¡£
-//Ã¿×ù³ÇÊÐ¶¼ÓÐÒ»¸ö ÐÒÔËÊý×Ö£¬ÒÔ¼ÍÄî±®µÄÐÎÊ½´£Á¢ÔÚÕâ×ù³ÇÊÐµÄÕýÖÐÐÄ£¬×÷Îª³ÇÊÐµÄÏóÕ÷¡£
-//Ò»Ð©ÂÃÐÐÕßÏ£ÍûÓÎÀÀ A ¹ú¡£ÂÃÐÐÕß¼Æ»® ³Ë·É»ú½µÂäÔÚ x ºÅ³ÇÊÐ£¬
-//ÑØ×Å x ºÅ³ÇÊÐµ½ y ºÅ³ÇÊÐÖ®¼äÄÇÌõÎ¨Ò»µÄÂ·¾¶ÓÎÀÀ£¬×îÖÕ´Ó y ³ÇÊÐÆð·ÉÀë¿ª A ¹ú¡£ 
-//ÔÚ¾­¹ýÃ¿Ò»×ù³ÇÊÐÊ±£¬ÓÎÀÀÕß¾Í»áÓÐ»ú»áÓëÕâ×ù³ÇÊÐµÄÐÒÔËÊý×ÖÅÄÕÕ£¬´Ó¶ø½«Õâ·ÝÐÒÔË±£´æµ½×Ô¼ºÉíÉÏ¡£
-//È»¶ø£¬ÐÒÔËÊÇ²»ÄÜ¼òµ¥µþ¼ÓµÄ£¬ÕâÒ»µãÓÎÀÀÕßÒ²Ê®·ÖÇå³þ¡£ËûÃÇÃÔÐÅ×ÅÐÒÔËÊý×ÖÊÇÒÔÒì»òµÄ·½Ê½±£ÁôÔÚ×Ô¼ºÉíÉÏµÄ¡£
-//ÀýÈç£¬ ÓÎÀÀÕßÅÄÁË 3 ÕÅÕÕÆ¬£¬ÐÒÔËÖµ·Ö±ðÊÇ 5£¬7£¬11£¬ÄÇÃ´×îÖÕ±£ÁôÔÚ×Ô¼ºÉíÉÏµÄÐÒÔËÖµ¾ÍÊÇ 9£¨5 xor 7 xor 11£©¡£ 
-//ÓÐÐ©´ÏÃ÷µÄÓÎÀÀÕß·¢ÏÖ£¬Ö»ÒªÑ¡ÔñÐÔµØ½øÐÐÅÄÕÕ£¬±ãÄÜ»ñµÃ¸ü´óµÄÐÒÔËÖµ¡£
-//ÀýÈçÔÚÉÏÊöÈý¸öÐÒÔËÖµÖÐ£¬Ö»Ñ¡Ôñ 5  ºÍ 11 £¬¿ÉÒÔ±£ÁôµÄÐÒÔËÖµÎª 14 ¡£
-//ÏÖÔÚ£¬Ò»Ð©ÓÎÀÀÕßÕÒµ½ÁË´ÏÃ÷µÄÄã£¬Ï£ÍûÄã°ïËûÃÇ¼ÆËã³öÔÚËûÃÇµÄÐÐ³Ì°²ÅÅÖÐ ¿ÉÒÔ±£ÁôµÄ×î´óÐÒÔËÖµÊÇ¶àÉÙ¡£
-//~ÊäÈë~
-//µÚÒ»ÐÐ°üº¬ 2 ¸öÕýÕûÊý n £¬q£¬·Ö±ð±íÊ¾³ÇÊÐµÄÊýÁ¿ºÍÂÃÐÐÕßÊýÁ¿¡£
-//µÚ¶þÐÐ°üº¬ n ¸ö·Ç¸ºÕûÊý£¬ÆäÖÐµÚ i ¸öÕûÊý Gi ±íÊ¾ i ºÅ³ÇÊÐµÄÐÒÔËÖµ¡£
-//Ëæºó n - 1 ÐÐ£¬Ã¿ÐÐ°üº¬Á½¸öÕýÕûÊý x £¬y£¬±íÊ¾ x ºÅ³ÇÊÐºÍ y ºÅ³ÇÊÐÖ®¼äÓÐÒ»ÌõµÀÂ·ÏàÁ¬¡£
-//Ëæºó q ÐÐ£¬Ã¿ÐÐ°üº¬Á½¸öÕýÕûÊý x £¬y£¬±íÊ¾ÕâÃûÂÃÐÐÕßµÄÂÃÐÐ¼Æ»®ÊÇ´Ó x ºÅ³ÇÊÐµ½ y ºÅ³ÇÊÐ¡£
-//N ¡Ü 20000, Q ¡Ü 200000, Gi ¡Ü 2 ^ 60
-//~Êä³ö~
-//Êä³öÐèÒª°üº¬ q ÐÐ£¬Ã¿ÐÐ°üº¬ 1 ¸ö·Ç¸ºÕûÊý£¬±íÊ¾ÕâÃûÂÃÐÐÕß¿ÉÒÔ±£ÁôµÄ×î´óÐÒÔËÖµ¡£
+//~é¢˜é¢~
+//A å›½å…±æœ‰ n åº§åŸŽå¸‚ï¼Œè¿™äº›åŸŽå¸‚ç”± n-1 æ¡é“è·¯ç›¸è¿žï¼Œä½¿å¾—ä»»æ„ä¸¤åº§åŸŽå¸‚å¯ä»¥äº’è¾¾ï¼Œä¸”è·¯å¾„å”¯ä¸€ã€‚
+//æ¯åº§åŸŽå¸‚éƒ½æœ‰ä¸€ä¸ª å¹¸è¿æ•°å­—ï¼Œä»¥çºªå¿µç¢‘çš„å½¢å¼çŸ—ç«‹åœ¨è¿™åº§åŸŽå¸‚çš„æ­£ä¸­å¿ƒï¼Œä½œä¸ºåŸŽå¸‚çš„è±¡å¾ã€‚
+//ä¸€äº›æ—…è¡Œè€…å¸Œæœ›æ¸¸è§ˆ A å›½ã€‚æ—…è¡Œè€…è®¡åˆ’ ä¹˜é£žæœºé™è½åœ¨ x å·åŸŽå¸‚ï¼Œ
+//æ²¿ç€ x å·åŸŽå¸‚åˆ° y å·åŸŽå¸‚ä¹‹é—´é‚£æ¡å”¯ä¸€çš„è·¯å¾„æ¸¸è§ˆï¼Œæœ€ç»ˆä»Ž y åŸŽå¸‚èµ·é£žç¦»å¼€ A å›½ã€‚ 
+//åœ¨ç»è¿‡æ¯ä¸€åº§åŸŽå¸‚æ—¶ï¼Œæ¸¸è§ˆè€…å°±ä¼šæœ‰æœºä¼šä¸Žè¿™åº§åŸŽå¸‚çš„å¹¸è¿æ•°å­—æ‹ç…§ï¼Œä»Žè€Œå°†è¿™ä»½å¹¸è¿ä¿å­˜åˆ°è‡ªå·±èº«ä¸Šã€‚
+//ç„¶è€Œï¼Œå¹¸è¿æ˜¯ä¸èƒ½ç®€å•å åŠ çš„ï¼Œè¿™ä¸€ç‚¹æ¸¸è§ˆè€…ä¹Ÿååˆ†æ¸…æ¥šã€‚ä»–ä»¬è¿·ä¿¡ç€å¹¸è¿æ•°å­—æ˜¯ä»¥å¼‚æˆ–çš„æ–¹å¼ä¿ç•™åœ¨è‡ªå·±èº«ä¸Šçš„ã€‚
+//ä¾‹å¦‚ï¼Œ æ¸¸è§ˆè€…æ‹äº† 3 å¼ ç…§ç‰‡ï¼Œå¹¸è¿å€¼åˆ†åˆ«æ˜¯ 5ï¼Œ7ï¼Œ11ï¼Œé‚£ä¹ˆæœ€ç»ˆä¿ç•™åœ¨è‡ªå·±èº«ä¸Šçš„å¹¸è¿å€¼å°±æ˜¯ 9ï¼ˆ5 xor 7 xor 11ï¼‰ã€‚ 
+//æœ‰äº›èªæ˜Žçš„æ¸¸è§ˆè€…å‘çŽ°ï¼Œåªè¦é€‰æ‹©æ€§åœ°è¿›è¡Œæ‹ç…§ï¼Œä¾¿èƒ½èŽ·å¾—æ›´å¤§çš„å¹¸è¿å€¼ã€‚
+//ä¾‹å¦‚åœ¨ä¸Šè¿°ä¸‰ä¸ªå¹¸è¿å€¼ä¸­ï¼Œåªé€‰æ‹© 5  å’Œ 11 ï¼Œå¯ä»¥ä¿ç•™çš„å¹¸è¿å€¼ä¸º 14 ã€‚
+//çŽ°åœ¨ï¼Œä¸€äº›æ¸¸è§ˆè€…æ‰¾åˆ°äº†èªæ˜Žçš„ä½ ï¼Œå¸Œæœ›ä½ å¸®ä»–ä»¬è®¡ç®—å‡ºåœ¨ä»–ä»¬çš„è¡Œç¨‹å®‰æŽ’ä¸­ å¯ä»¥ä¿ç•™çš„æœ€å¤§å¹¸è¿å€¼æ˜¯å¤šå°‘ã€‚
+//~è¾“å…¥~
+//ç¬¬ä¸€è¡ŒåŒ…å« 2 ä¸ªæ­£æ•´æ•° n ï¼Œqï¼Œåˆ†åˆ«è¡¨ç¤ºåŸŽå¸‚çš„æ•°é‡å’Œæ—…è¡Œè€…æ•°é‡ã€‚
+//ç¬¬äºŒè¡ŒåŒ…å« n ä¸ªéžè´Ÿæ•´æ•°ï¼Œå…¶ä¸­ç¬¬ i ä¸ªæ•´æ•° Gi è¡¨ç¤º i å·åŸŽå¸‚çš„å¹¸è¿å€¼ã€‚
+//éšåŽ n - 1 è¡Œï¼Œæ¯è¡ŒåŒ…å«ä¸¤ä¸ªæ­£æ•´æ•° x ï¼Œyï¼Œè¡¨ç¤º x å·åŸŽå¸‚å’Œ y å·åŸŽå¸‚ä¹‹é—´æœ‰ä¸€æ¡é“è·¯ç›¸è¿žã€‚
+//éšåŽ q è¡Œï¼Œæ¯è¡ŒåŒ…å«ä¸¤ä¸ªæ­£æ•´æ•° x ï¼Œyï¼Œè¡¨ç¤ºè¿™åæ—…è¡Œè€…çš„æ—…è¡Œè®¡åˆ’æ˜¯ä»Ž x å·åŸŽå¸‚åˆ° y å·åŸŽå¸‚ã€‚
+//N â‰¤ 20000, Q â‰¤ 200000, Gi â‰¤ 2 ^ 60
+//~è¾“å‡º~
+//è¾“å‡ºéœ€è¦åŒ…å« q è¡Œï¼Œæ¯è¡ŒåŒ…å« 1 ä¸ªéžè´Ÿæ•´æ•°ï¼Œè¡¨ç¤ºè¿™åæ—…è¡Œè€…å¯ä»¥ä¿ç•™çš„æœ€å¤§å¹¸è¿å€¼ã€‚
 #include<bits/stdc++.h>
 #define upf(a,b,c) for(ll a=b;a<=c;++a)
 #define drf(a,b,c) for(ll a=b;a>=c;--a)
@@ -31,14 +31,14 @@ ll powmod(ll a, ll b) { ll res = 1; a %= mod; assert(b >= 0); for (; b; b >>= 1)
 ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
 ll n, q, g[maxn];
 struct Linear_Basis {
-    long long d[61];  //d[]ÖØ¹¹Ç°µÄÏßÐÔ»ù£¬p[]ÖØ¹¹ºóµÄÏßÐÔ»ù
-    int cnt;                //¼ÇÂ¼ÏßÐÔ»ùµÄÖÈ
-    Linear_Basis()              //³õÊ¼»¯
+    long long d[61];  //d[]é‡æž„å‰çš„çº¿æ€§åŸºï¼Œp[]é‡æž„åŽçš„çº¿æ€§åŸº
+    int cnt;                //è®°å½•çº¿æ€§åŸºçš„ç§©
+    Linear_Basis()              //åˆå§‹åŒ–
     {
         memset(d, 0, sizeof(d));
         cnt = 0;
     }
-    bool insert(long long val)  //²åÈëÏßÐÔ»ù
+    bool insert(long long val)  //æ’å…¥çº¿æ€§åŸº
     {
         for (int i = 60; i >= 0; i--)
             if (val & (1LL << i))
@@ -52,7 +52,7 @@ struct Linear_Basis {
             }
         return val > 0;
     }
-    //¿ÉÉú³É0¾Í·µ»Øtrue
+    //å¯ç”Ÿæˆ0å°±è¿”å›žtrue
     bool check(long long val) {
         for (int i = 32; i >= 0; i--)
             if (val & (1LL << i)) {
@@ -62,7 +62,7 @@ struct Linear_Basis {
             }
         return true;
     }
-    //¼ÆËãÏßÐÔ»ùÏòÁ¿¿Õ¼äÄÚ×î´óÖµ
+    //è®¡ç®—çº¿æ€§åŸºå‘é‡ç©ºé—´å†…æœ€å¤§å€¼
     long long query_max()
     {
         long long ret = 0;
@@ -72,7 +72,7 @@ struct Linear_Basis {
         return ret;
     }
 };
-//ºÏ²¢Á½¸öÏßÐÔ»ù
+//åˆå¹¶ä¸¤ä¸ªçº¿æ€§åŸº
 Linear_Basis merge(const Linear_Basis& n1, const Linear_Basis& n2)
 {
     Linear_Basis ret = n1;

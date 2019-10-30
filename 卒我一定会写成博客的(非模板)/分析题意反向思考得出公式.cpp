@@ -1,7 +1,7 @@
 #pragma warning(disable:4996)
-//��Ŀ��hdoj6651
-//n�⣬m��֪ʶ�㣬����(�ȸ���֪ʶ�������1��)k��
-//��ϰ��������֪ʶ��
+//题目：hdoj6651
+//n题，m个知识点，需答对(比该题知识点高至少1分)k题
+//复习所需最少知识点
 
 #include<bits/stdc++.h>
 #define upf(a,b,c) for(ll a=b;a<=c;++a)
@@ -19,9 +19,9 @@ using namespace std;
 ll powmod(ll a, ll b) { ll res = 1; a %= mod; assert(b >= 0); for (; b; b >>= 1) { if (b & 1)res = res * a % mod; a = a * a % mod; }return res; }
 ll gcd(ll a, ll b) { return b ? gcd(b, a % b) : a; }
 ll n, m, k, t;
-//���ڸ�ϰ֪ʶ�����ٵ�n-k+1�������Ҫͨ����������Ҫ����Щ�������ٸ�ϰm+1��֪ʶ��
-//����ʣ���k-1��������Ҫ��ϰ���ٵ�n-k+1����֪ʶ��������
-//��ô��������֪ʶ�㸴ϰ����Ҫ��ϰm/(n-k+1)+1��֪ʶ��
+//对于复习知识点最少的n-k+1题如果需要通过考试则需要在这些题上至少复习m+1个知识点
+//对于剩余的k-1题至少需要复习最少的n-k+1题中知识点最多的题
+//那么对于最少知识点复习则需要复习m/(n-k+1)+1个知识点
 ll hanshu() {
     return (m + 1 + (k - 1) * (m / (n - k + 1) + 1));
 }

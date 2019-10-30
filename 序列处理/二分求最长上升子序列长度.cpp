@@ -1,4 +1,4 @@
-int a[maxn], dp[maxn], T, n;
+ï»¿int a[maxn], dp[maxn], T, n;
 void acm() {
     cin >> T;
     Tcase(T) {
@@ -6,11 +6,11 @@ void acm() {
         upf(i, 1, n) cin >> a[i];
         int len = 0;
         for (int i = 1; i <= n; i++) {
-            int pos = lower_bound(dp, dp + len, a[i]) - dp; //×î³¤²»ÏÂ½µ×ÓÐòÁÐÓÃupper_bound,×î³¤ÉÏÉý×ÓÐòÁÐÓÃlower_bound
-            if (pos == len)//Èç¹û¿ÉÒÔ½ÓÔÚlenºóÃæ¾Í½ÓÉÏ£¬Èç¹ûÊÇ×î³¤ÉÏÉý×ÓÐòÁÐ£¬ÕâÀï±ä³É
+            int pos = lower_bound(dp, dp + len, a[i]) - dp; //æœ€é•¿ä¸ä¸‹é™å­åºåˆ—ç”¨upper_bound,æœ€é•¿ä¸Šå‡å­åºåˆ—ç”¨lower_bound
+            if (pos == len)//å¦‚æžœå¯ä»¥æŽ¥åœ¨lenåŽé¢å°±æŽ¥ä¸Šï¼Œå¦‚æžœæ˜¯æœ€é•¿ä¸Šå‡å­åºåˆ—ï¼Œè¿™é‡Œå˜æˆ
                 dp[len++] = a[i];
-            else//·ñÔò¾ÍÕÒÒ»¸ö×î¸ÃÌæ»»µÄÌæ»»µô
+            else//å¦åˆ™å°±æ‰¾ä¸€ä¸ªæœ€è¯¥æ›¿æ¢çš„æ›¿æ¢æŽ‰
                 dp[pos] = a[i];
-        }//×îÖÕlen¾ÍÊÇÒªÇóµÄ×î³¤ÉÏÉý×ÓÐòÁÐ³¤¶È
+        }//æœ€ç»ˆlenå°±æ˜¯è¦æ±‚çš„æœ€é•¿ä¸Šå‡å­åºåˆ—é•¿åº¦
     }
 }
