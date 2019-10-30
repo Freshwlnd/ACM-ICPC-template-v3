@@ -1,4 +1,4 @@
-//FFT求*为通配符的字符串匹配位置
+﻿//FFT求*为通配符的字符串匹配位置
 #include<bits/stdc++.h>
 #define db double
 #define RI register//register将变量放置在寄存器中，可少量加速但不能调用变量地址
