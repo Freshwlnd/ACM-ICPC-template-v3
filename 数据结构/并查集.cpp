@@ -48,5 +48,4 @@ public:
     bool isConnected(int p, int q) {
         return find(p) == find(q);
     }
-
 };
