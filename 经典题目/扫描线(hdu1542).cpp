@@ -1,6 +1,6 @@
 /*
-	¸Ã³ÌĞò¼ÆËãµÄÊÇÆ½ÃæÉÏËùÓĞ¾ØĞÎµÃÃæ»ı
-	Èç¹ûĞèÒª¼ÆËãÖØµş²¿·ÖÃæ»ı£¬Ö»Ğè×ÜÃæ»ı¼õÈ¥ans¼´¿É
+	è¯¥ç¨‹åºè®¡ç®—çš„æ˜¯å¹³é¢ä¸Šæ‰€æœ‰çŸ©å½¢å¾—é¢ç§¯
+	å¦‚æœéœ€è¦è®¡ç®—é‡å éƒ¨åˆ†é¢ç§¯ï¼Œåªéœ€æ€»é¢ç§¯å‡å»anså³å¯
 */
 #include<iostream>
 #include<cstdio>
@@ -9,15 +9,15 @@
 using namespace std;
 const int maxn = 110;
 struct node {
-	int status;			//¼ÇÂ¼µ±Ç°Èë±ßÊıÁ¿
-	double len;			//¼ÇÂ¼¾ØĞÎ¿í¶È
-	int l, r;			//Ïß¶ÎÊ÷ÀíÂÛ±íÊ¾µÄÇø¼ä
-}t[maxn << 3];			//´æ´¢Ïß¶ÎÊ÷
-double x[maxn << 2];	//xÓÃÓÚÀëÉ¢»¯
+	int status;			//è®°å½•å½“å‰å…¥è¾¹æ•°é‡
+	double len;			//è®°å½•çŸ©å½¢å®½åº¦
+	int l, r;			//çº¿æ®µæ ‘ç†è®ºè¡¨ç¤ºçš„åŒºé—´
+}t[maxn << 3];			//å­˜å‚¨çº¿æ®µæ ‘
+double x[maxn << 2];	//xç”¨äºç¦»æ•£åŒ–
 int xtot;
 struct edge {
-	double l, r, h;		//°´yÖá·Ö£¬Ä³Ìõ±ßµÄ×ó±ß½ç£¬ÓÒ±ß½ç£¬¸ß¶È(yÖáÎ»ÖÃ)
-	int status;			//¼ÇÂ¼Èë±ß»¹ÊÇ³ö±ß
+	double l, r, h;		//æŒ‰yè½´åˆ†ï¼ŒæŸæ¡è¾¹çš„å·¦è¾¹ç•Œï¼Œå³è¾¹ç•Œï¼Œé«˜åº¦(yè½´ä½ç½®)
+	int status;			//è®°å½•å…¥è¾¹è¿˜æ˜¯å‡ºè¾¹
 	edge() {}
 	edge(double a, double b, double c, int cover) :l(a), r(b), h(c), status(cover) {}
 	bool operator<(const edge &E) {
@@ -30,7 +30,7 @@ bool cmp(int a, int b) {
 }
 #define lson l,mid,rt<<1
 #define rson mid+1,r,rt<<1|1
-//ÏÈ½¨¿ÕÊ÷£¬ºóÀ´²åÈë
+//å…ˆå»ºç©ºæ ‘ï¼Œåæ¥æ’å…¥
 void build(int l, int r, int rt) {
 	t[rt].l = l;
 	t[rt].r = r;
@@ -41,17 +41,17 @@ void build(int l, int r, int rt) {
 	build(rson);
 }
 void pushup(int now) {
-	if (t[now].status) {				//Èç¹ûµ±Ç°yÖáÎ¬¶ÈÓĞÈë±ß
+	if (t[now].status) {				//å¦‚æœå½“å‰yè½´ç»´åº¦æœ‰å…¥è¾¹
 		t[now].len = x[t[now].r + 1] - x[t[now].l];
 	}
-	else if (t[now].l == t[now].r) {	//¸Ã½ÚµãÃ»ÓĞÈë±ß£¬¾ØĞÎ³¤¶È¾ÍÊÇ0
+	else if (t[now].l == t[now].r) {	//è¯¥èŠ‚ç‚¹æ²¡æœ‰å…¥è¾¹ï¼ŒçŸ©å½¢é•¿åº¦å°±æ˜¯0
 		t[now].len = 0;
 	}
 	else {
 		t[now].len = t[now << 1].len + t[now << 1 | 1].len;
 	}
 }
-//Ïß¶ÎÊ÷Î¬»¤ÁËÔÚÏß¶Î±íÊ¾·¶Î§ÄÚ´æÔÚ¾ØĞÎµÄ¿í¶È
+//çº¿æ®µæ ‘ç»´æŠ¤äº†åœ¨çº¿æ®µè¡¨ç¤ºèŒƒå›´å†…å­˜åœ¨çŸ©å½¢çš„å®½åº¦
 void update(int l, int r, int rt, int val) {
 	if (t[rt].l == l && t[rt].r == r) {
 		t[rt].status += val;
@@ -81,16 +81,16 @@ int main() {
 		}
 		sort(e, e + etot);
 		sort(x, x + xtot);
-		xtot = unique(x, x + xtot) - x;//ÀëÉ¢»¯x×ø±ê
+		xtot = unique(x, x + xtot) - x;//ç¦»æ•£åŒ–xåæ ‡
 		double ans = 0;
 		build(0, xtot - 1, 1);
 		for (int i = 0; i < etot; i++) {
-			int l = lower_bound(x, x + xtot, e[i].l) - x;		//Ïß¶Î×ó¶ËµãÅÅÃûµÚl´ó
-			int r = lower_bound(x, x + xtot, e[i].r) - x - 1;	//ÓÒ¶ËµãµÚr´ó
-			//Çø¼äÕâÀï²¢²»ÊÇÍêÈ«°üº¬±ÈÈç10£¬15£¬20£¬25 µÄÇø¼ä ²éÑ¯10-15 ÄÇÃ´È¥²éµÄ¾ÍÊÇ10-10
-			//Ê²Ã´ÒâË¼ ÒòÎªÏß¶ÎÊ÷ÈÔÈ»ÊÇÀëÉ¢µÄÍ³¼Æ½á¹¹ ÈÔÈ»»¹ÊÇ°´ÕÕÆğµã²éÑ¯Çø¼äÏß¶Î
+			int l = lower_bound(x, x + xtot, e[i].l) - x;		//çº¿æ®µå·¦ç«¯ç‚¹æ’åç¬¬lå¤§
+			int r = lower_bound(x, x + xtot, e[i].r) - x - 1;	//å³ç«¯ç‚¹ç¬¬rå¤§
+			//åŒºé—´è¿™é‡Œå¹¶ä¸æ˜¯å®Œå…¨åŒ…å«æ¯”å¦‚10ï¼Œ15ï¼Œ20ï¼Œ25 çš„åŒºé—´ æŸ¥è¯¢10-15 é‚£ä¹ˆå»æŸ¥çš„å°±æ˜¯10-10
+			//ä»€ä¹ˆæ„æ€ å› ä¸ºçº¿æ®µæ ‘ä»ç„¶æ˜¯ç¦»æ•£çš„ç»Ÿè®¡ç»“æ„ ä»ç„¶è¿˜æ˜¯æŒ‰ç…§èµ·ç‚¹æŸ¥è¯¢åŒºé—´çº¿æ®µ
 			update(l, r, 1, e[i].status);
-			ans += (e[i + 1].h - e[i].h)*t[1].len;				//Á½ÌõÏßÖ®¼äµÄ¸ß¶È²î£¬³ËÉÏ£¬µÚi´¦¸ß¶ÈµÄ×Ü¿í¶È£¬¼´µÃ×îºóµÄÃæ»ı
+			ans += (e[i + 1].h - e[i].h)*t[1].len;				//ä¸¤æ¡çº¿ä¹‹é—´çš„é«˜åº¦å·®ï¼Œä¹˜ä¸Šï¼Œç¬¬iå¤„é«˜åº¦çš„æ€»å®½åº¦ï¼Œå³å¾—æœ€åçš„é¢ç§¯
 		}
 		printf("Test case #%d\nTotal explored area: %.2f\n\n", test, ans);
 		etot = 0;

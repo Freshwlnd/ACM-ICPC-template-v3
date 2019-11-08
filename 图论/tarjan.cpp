@@ -12,11 +12,7 @@ void tarjan(int now) {
             tarjan(it);
             low[now] = min(low[now], low[it]);
         } else if (vis[it])
-            low[now] = min(low[now], dfn[it]);  //一旦遇到已入栈的点，就将该点作为连通量的根
-                                                //这里用dfn[e[i].v]更新的原因是：这个点可能
-                                                //已经在另一个强连通分量中了但暂时尚未出栈，所
-                                                //以now不一定能到达low[e[i].v]但一定能到达
-                                                // dfn[e[i].v].
+            low[now] = min(low[now], dfn[it]);  //这里dfn和low都没有问题
     }
     if (low[now] == dfn[now]) {
         int cur;
