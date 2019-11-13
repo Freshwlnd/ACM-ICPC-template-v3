@@ -3,7 +3,7 @@ using namespace std;
 typedef long long ll;
 // head
 
-//不支持负数 减法、乘法、除法
+//不支持负数的减法、乘法、除法
 struct BigInteger {
     static const int BASE = 100000000;
     static const int WIDTH = 8;
