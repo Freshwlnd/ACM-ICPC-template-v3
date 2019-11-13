@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 //a^b%m=a^(b%f(m))
 //其中 f(m) 为欧拉函数
 
+=======
+//a^b%m=a^(b%f(m)),gcd(b,m)==1
+//其中 f(m) 为欧拉函数
+//广义欧拉降幂：a^b=a^(b%phi[p]+phi[p])%p,gcd(b,p)!=1
+>>>>>>> upstream/master
 typedef long long ll;
 const ll maxn=1e5+5,m=1e9+7;
 char s[100005];

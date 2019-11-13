@@ -11,7 +11,10 @@ inline double LCP(int a1, int a2, int b1, int b2) {
     return (x[a2]-x[a1])*(y[b2]-y[b1])-(x[b2]-x[b1])*(y[a2]-y[a1]);
 }
 
+<<<<<<< HEAD
 //Line Intersect 线段相交：true相交/false不相交
+=======
+>>>>>>> upstream/master
 inline int LI(int line1, int line2) {
     int a1 = line1*2, a2 = a1+1;    //起点-终点
     int b1 = line2*2, b2 = b1+1;    //起点-终点
@@ -30,4 +33,8 @@ inline int LI(int line1, int line2) {
     f[2] = LCP(b1, b2, b1, a1);   //b1-b2 X b1 a1
     f[3] = LCP(b1, b2, b1, a2);   //b1-b2 X b1 a2
     return (f[0]*f[1]<=EPS && f[2]*f[3]<=EPS);      //<0则意味着在不同方向，用eps消除精度误差
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> upstream/master
