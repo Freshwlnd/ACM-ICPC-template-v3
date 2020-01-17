@@ -32,7 +32,7 @@ inline ull getha(int l, int r) {
     return ha[r] - ha[l - 1] * pp[r - l + 1];
 }
 
-inline bool check(int l1, int r1， int l2, int r2) {
+inline bool check(int l1, int r1, int l2, int r2) {
     return getha(l1, r1) == getha(l2, r2);
 }
 

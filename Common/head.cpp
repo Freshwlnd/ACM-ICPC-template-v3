@@ -35,6 +35,6 @@ typedef pair<int, int> pI;
 typedef vector<ll> vI;
 const ll mod(1e9 + 7);
 const ll INF(0x3f3f3f3f);
-ll powmod(ll a, ll b) { ll res = 1; a %= mod; assert(b >= 0); for (; b; b >>= 1) { if (b & 1)res = res * a%mod; a = a * a%mod; }return res; }
+ll powmod(ll a, ll b) { ll res = 1; a %= mod; assert(b >= 0); for (; b; b >>= 1) { if (b & 1)res = res * a%mod; a = a * a%mod; }return res%mod; }
 ll gcd(ll a, ll b) { return b ? gcd(b, a%b) : a; }
 // head
