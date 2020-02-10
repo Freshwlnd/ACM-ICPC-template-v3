@@ -34,6 +34,35 @@ void Dijkstra(int u) {
     }
 }
 
+//优先队列优化Dijkstra
+struct cmp {
+    bool operator ()(const int &a,const int &b) {
+        return len[a]>len[b];   //len越小排越前面
+    }
+};
+priority_queue<int,vector<int>,cmp> Q;
+void Dijkstra(int u) {
+    mem(vis, 0);
+    mem(len, 0x3f);
+    len[u] = 0;
+
+    Q.push(u);
+
+    while(!Q.empty()) {
+        u = Q.top();
+        Q.pop();
+        if(vis[u]) continue;    //同一个点会被加入很多次，防止重复
+        vis[u] = 1;
+        per(j, 1, n + 1) {  //如果存的是边，优化效果更好（除非是完全图）
+            if (!vis[j]) {
+                len[j] = min(len[j], mapp[u][j] + len[u]);
+                Q.push(j);
+            }
+        }
+    }
+}
+
+
 //Floyd
 void Floyd() {
     per(k, 1, n+1) per(i, 1, n+1) per(j, 1, n+1)
