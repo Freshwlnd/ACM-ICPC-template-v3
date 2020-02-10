@@ -1,4 +1,5 @@
-﻿int a[maxn], dp[maxn], T, n;
+﻿//不下降子序列个数等于最长上升子序列长度
+int a[maxn], dp[maxn], T, n;
 void acm() {
     cin >> T;
     Tcase(T) {
