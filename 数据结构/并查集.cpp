@@ -21,8 +21,7 @@ public:
             return -1;
         if(target == parent[target])
             return target;
-        parent[target] = find(parent[target])
-        return parent[target];
+        return parent[target] = find(parent[target]);
     }
     //合并集合
     void get_together(int p, int q) {
