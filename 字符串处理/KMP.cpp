@@ -34,7 +34,7 @@ int kmp(char *a,char *b)//匹配ab两串，a为父串
 	int len2=strlen(b);
 	getnext();
 	while(i<len1&&j<len2) {
-		if(k==-1 || a[i]==b[j]) {
+		if(j==-1 || a[i]==b[j]) {
 			i++;j++;
 		} else {
 			j=nextt[j];//到前一个匹配点
