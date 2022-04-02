@@ -5,7 +5,7 @@ vector<int> Next;   // Next[i]表示 ptr“0～i-1” 中，“最长前后缀�
 
 void getNext(string ptr) {
     int len = ptr.size();
-    Next = vector<int>(len,-1);
+    Next = vector<int>(len+1,-1);
     int i=0, k=-1;
     while(i<len) {
         if(k==-1 || ptr[k]==ptr[i]) {
