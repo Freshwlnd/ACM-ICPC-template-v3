@@ -1,60 +1,53 @@
-#include<bits/stdc++.h>
-
-#define INF 0x3fffffff
-#define ll long long
-#define per(i,a,b) for(int i=a;a<b?i<b:i>0;a<b?++i:--i)
-
+#include <bits/stdc++.h>
 using namespace std;
 
-const int N = 100005;
-char str[maxlen],ptr[maxlen];//父串str和子串ptr
-int nextt[maxlen];
+vector<int> Next;   // Next[i]表示 ptr“0～i-1” 中，“最长前后缀”长度
 
-void getnext()//获取nextt数组
-{
-	int i,n,k;
-	n=strlen(ptr);
-	i = 0;
-	k = nextt[i] = -1;
-	while(i<n) {
-		if(k==-1 || ptr[k]==ptr[i]) {
-			i++;k++;
-			nextt[i] = k;
-		} else {
-			k = nextt[k];
-		}
-		//nextt[i]表示的是“0～i-1”中，“最长前后缀”长度
-	}
+void getNext(string ptr) {
+    int len = ptr.size();
+    Next = vector<int>(len+1,-1);
+    int i=0, k=-1;
+    while(i<len) {
+        if(k==-1 || ptr[k]==ptr[i]) {
+            ++i;++k;
+            Next[i] = k;
+        } else {
+            k = Next[k];
+        }
+    }
 }
 
-int kmp(char *a,char *b)//匹配ab两串，a为父串
-{
-	int i=0,j=0;
-	int len1=strlen(a);
-	int len2=strlen(b);
-	getnext();
-	while(i<len1&&j<len2) {
-		if(k==-1 || a[i]==b[j]) {
-			i++;j++;
-		} else {
-			j=nextt[j];//到前一个匹配点
-		}
-	}
-	if(j>=len2) {
-		return i-j;
-	} else {
-		return -1;
-	}
+int kmp(string str, string ptr) { // 在str中匹配ptr
+    getNext(ptr);
+    int i=0, j=0;
+    int len1=str.size();
+    int len2=ptr.size();
+    while(i<len1&&j<len2) {
+        if(j==-1 || str[i]==ptr[j]) {
+            i++;j++;
+        } else {
+            j=Next[j];  //到前一个匹配点
+        }
+    }
+    if(j>=len2) {
+        return i-j;
+    } else {
+        return -1;
+    }
 }
 
-int main(){
-	while( scanf( "%s%s", str, ptr)) {
-		int ans = kmp(str,ptr);
-		if(ans>=0) {
-			printf( "%d\n", kmp( str,ptr ));
-		} else {
-			printf("Not find\n");
-		}
-	}
-	return 0;
+int main() {
+
+    string str, ptr;    // 文本串str 模式串ptr
+    
+    while( cin >> str >> ptr ) {
+        int ans = kmp(str,ptr);
+        if(ans>=0) {
+            cout << ans << endl;
+        } else {
+            cout << "Not Find" << endl;
+        }
+    }
+
+    return 0;
 }
